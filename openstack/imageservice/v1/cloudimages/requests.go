@@ -42,10 +42,10 @@ func ListImageTags(client *golangsdk.ServiceClient, opts ListImageTagsOpts) (r I
 type SetImageTagOpts struct {
 
 	// ImageID is the image id
-	ImageID string
+	ImageID string `json:"image_id"`
 
 	// Tag is the tag you wanna set
-	Tag string
+	Tag string `json:"tag"`
 }
 
 // ToImageSetMap assembles a request body
