@@ -39,6 +39,7 @@ func TestOperateImageTags(t *testing.T) {
 	client, err := clients.NewImageServiceV1Client()
 	th.AssertNoErr(t, err)
 
+	// FIXME broken, caused by huaweicloud platform
 	setTagResult := cloudimages.SetImageTag(client, cloudimages.SetImageTagOpts{
 		ImageID: imageID,
 		Tag:     "golangtag.blabla",
