@@ -283,3 +283,45 @@ func TestDeleteMetadataKey(t *testing.T) {
 	res := volumes.DeleteMetadataKey(client.ServiceClient(), "8dd7c486-8e9f-49fe-bceb-26aa7e312b66", "key")
 	th.AssertNoErr(t, res.Err)
 }
+
+func TestExtendSize(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+
+	MockExtendSizeResponse(t)
+
+	options := &volumes.ExtendSizeOpts{
+		NewSize: 3,
+	}
+
+	err := volumes.ExtendSize(client.ServiceClient(), "8dd7c486-8e9f-49fe-bceb-26aa7e312b66", options).ExtractErr()
+	th.AssertNoErr(t, err)
+}
+
+func TestSetBootable(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+
+	MockSetBootableResponse(t)
+
+	options := &volumes.SetBootableOpts{
+		Bootable: true,
+	}
+
+	err := volumes.SetBootable(client.ServiceClient(), "8dd7c486-8e9f-49fe-bceb-26aa7e312b66", options).ExtractErr()
+	th.AssertNoErr(t, err)
+}
+
+func TestSetReadOnly(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+
+	MockSetReadOnlyResponse(t)
+
+	options := &volumes.SetReadOnlyOpts{
+		ReadOnly: true,
+	}
+
+	err := volumes.SetReadOnly(client.ServiceClient(), "8dd7c486-8e9f-49fe-bceb-26aa7e312b66", options).ExtractErr()
+	th.AssertNoErr(t, err)
+}

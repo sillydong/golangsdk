@@ -454,3 +454,72 @@ func MockDeleteMetadataKeyResponse(t *testing.T) {
 		w.WriteHeader(http.StatusAccepted)
 	})
 }
+
+func MockExtendSizeResponse(t *testing.T) {
+	th.Mux.HandleFunc("/volumes/8dd7c486-8e9f-49fe-bceb-26aa7e312b66/action",
+		func(w http.ResponseWriter, r *http.Request) {
+			th.TestMethod(t, r, "POST")
+			th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
+			th.TestHeader(t, r, "Content-Type", "application/json")
+			th.TestHeader(t, r, "Accept", "application/json")
+			th.TestJSONRequest(t, r, `
+{
+    "os-extend":
+    {
+        "new_size": 3
+    }
+}
+          `)
+
+			w.Header().Add("Content-Type", "application/json")
+			w.WriteHeader(http.StatusAccepted)
+
+			fmt.Fprintf(w, `{}`)
+		})
+}
+
+func MockSetBootableResponse(t *testing.T) {
+	th.Mux.HandleFunc("/volumes/8dd7c486-8e9f-49fe-bceb-26aa7e312b66/action",
+		func(w http.ResponseWriter, r *http.Request) {
+			th.TestMethod(t, r, "POST")
+			th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
+			th.TestHeader(t, r, "Content-Type", "application/json")
+			th.TestHeader(t, r, "Accept", "application/json")
+			th.TestJSONRequest(t, r, `
+{
+    "os-set_bootable":
+    {
+        "bootable": true
+    }
+}
+          `)
+
+			w.Header().Add("Content-Type", "application/json")
+			w.WriteHeader(http.StatusAccepted)
+
+			fmt.Fprintf(w, `{}`)
+		})
+}
+
+func MockSetReadOnlyResponse(t *testing.T) {
+	th.Mux.HandleFunc("/volumes/8dd7c486-8e9f-49fe-bceb-26aa7e312b66/action",
+		func(w http.ResponseWriter, r *http.Request) {
+			th.TestMethod(t, r, "POST")
+			th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
+			th.TestHeader(t, r, "Content-Type", "application/json")
+			th.TestHeader(t, r, "Accept", "application/json")
+			th.TestJSONRequest(t, r, `
+{
+    "os-update_readonly_flag":
+    {
+        "readonly": true
+    }
+}
+          `)
+
+			w.Header().Add("Content-Type", "application/json")
+			w.WriteHeader(http.StatusAccepted)
+
+			fmt.Fprintf(w, `{}`)
+		})
+}

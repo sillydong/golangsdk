@@ -179,5 +179,20 @@ func (r MetadataResult) ExtractMetadata() (map[string]interface{}, error) {
 
 // DeleteMetadataResult contains the response body and error from a DeleteMetadata request.
 type DeleteMetadataKeyResult struct {
-	commonResult
+	golangsdk.ErrResult
+}
+
+// ExtendSizeResult contains the response body and error from an ExtendSize request.
+type ExtendSizeResult struct {
+	golangsdk.ErrResult
+}
+
+// SetBootableResult contains the response body and error from an SetBootable request
+type SetBootableResult struct {
+	golangsdk.ErrResult
+}
+
+// SetReadOnlyResult contains the response body and error from an SetReadOnly request
+type SetReadOnlyResult struct {
+	golangsdk.ErrResult
 }

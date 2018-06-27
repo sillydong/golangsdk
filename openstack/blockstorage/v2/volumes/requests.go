@@ -294,3 +294,102 @@ func DeleteMetadataKey(client *golangsdk.ServiceClient, id, key string) (r Delet
 	_, r.Err = client.Delete(metadataKeyURL(client, id, key), nil)
 	return
 }
+
+// ExtendSizeOptsBuilder allows extensions to add additional parameters to the
+// ExtendSize request.
+type ExtendSizeOptsBuilder interface {
+	ToVolumeExtendSizeMap() (map[string]interface{}, error)
+}
+
+// ExtendSizeOpts contains options for extending the size of an existing Volume.
+// This object is passed to the volumes.ExtendSize function.
+type ExtendSizeOpts struct {
+	// NewSize is the new size of the volume, in GB.
+	NewSize int `json:"new_size" required:"true"`
+}
+
+// ToVolumeExtendSizeMap assembles a request body based on the contents of an
+// ExtendSizeOpts.
+func (opts ExtendSizeOpts) ToVolumeExtendSizeMap() (map[string]interface{}, error) {
+	return golangsdk.BuildRequestBody(opts, "os-extend")
+}
+
+// ExtendSize will extend the size of the volume based on the provided information.
+// This operation does not return a response body.
+func ExtendSize(client *golangsdk.ServiceClient, id string, opts ExtendSizeOptsBuilder) (r ExtendSizeResult) {
+	b, err := opts.ToVolumeExtendSizeMap()
+	if err != nil {
+		r.Err = err
+		return
+	}
+	_, r.Err = client.Post(actionURL(client, id), b, nil, &golangsdk.RequestOpts{
+		OkCodes: []int{202},
+	})
+	return
+}
+
+// SetBootableOptsBuilder allows extensions to add additional parameters to the
+// SetBootable request.
+type SetBootableOptsBuilder interface {
+	ToVolumeSetBootableMap() (map[string]interface{}, error)
+}
+
+// SetBootableOpts contains options for setting bootable flag of an existing Volume.
+// This object is passed to the volumes.SetBootable function.
+type SetBootableOpts struct {
+	// Bootable is bool of true or false
+	Bootable bool `json:"bootable" required:"true"`
+}
+
+// ToVolumeSetBootableMap assembles a request body based on the contents of an
+// SetBootableOpts.
+func (opts SetBootableOpts) ToVolumeSetBootableMap() (map[string]interface{}, error) {
+	return golangsdk.BuildRequestBody(opts, "os-set_bootable")
+}
+
+// SetBootable will set bootable flag of the volume based on the provided information.
+// This operation does not return a response body.
+func SetBootable(client *golangsdk.ServiceClient, id string, opts SetBootableOptsBuilder) (r SetBootableResult) {
+	b, err := opts.ToVolumeSetBootableMap()
+	if err != nil {
+		r.Err = err
+		return
+	}
+	_, r.Err = client.Post(actionURL(client, id), b, nil, &golangsdk.RequestOpts{
+		OkCodes: []int{202},
+	})
+	return
+}
+
+// SetReadOnlyOptsBuilder allows extensions to add additional parameters to the
+// SetReadOnly request.
+type SetReadOnlyOptsBuilder interface {
+	ToVolumeSetReadOnlyMap() (map[string]interface{}, error)
+}
+
+// SetReadOnlyOpts contains options for setting readonly flag of an existing Volume.
+// This object is passed to the volumes.SetReadOnly function.
+type SetReadOnlyOpts struct {
+	// ReadOnly is bool of true or false
+	ReadOnly bool `json:"readonly" required:"true"`
+}
+
+// ToVolumeSetReadOnlyMap assembles a request body based on the contents of an
+// SetReadOnlyOpts.
+func (opts SetReadOnlyOpts) ToVolumeSetReadOnlyMap() (map[string]interface{}, error) {
+	return golangsdk.BuildRequestBody(opts, "os-update_readonly_flag")
+}
+
+// SetReadOnly will set readonly flag of the volume based on the provided information.
+// This operation does not return a response body.
+func SetReadOnly(client *golangsdk.ServiceClient, id string, opts SetReadOnlyOptsBuilder) (r SetReadOnlyResult) {
+	b, err := opts.ToVolumeSetReadOnlyMap()
+	if err != nil {
+		r.Err = err
+		return
+	}
+	_, r.Err = client.Post(actionURL(client, id), b, nil, &golangsdk.RequestOpts{
+		OkCodes: []int{202},
+	})
+	return
+}

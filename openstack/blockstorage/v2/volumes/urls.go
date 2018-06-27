@@ -42,3 +42,7 @@ func metadataKeyURL(c *golangsdk.ServiceClient, id, key string) string {
 	return c.ServiceURL("volumes", id, "metadata", key)
 }
 
+// 4.1 4.9
+func actionURL(c *golangsdk.ServiceClient, id string) string {
+	return c.ServiceURL("volumes", id, "action")
+}
