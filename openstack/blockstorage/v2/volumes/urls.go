@@ -31,3 +31,14 @@ func getURL(c *golangsdk.ServiceClient, id string) string {
 func updateURL(c *golangsdk.ServiceClient, id string) string {
 	return deleteURL(c, id)
 }
+
+// 3.31 3.33 3.35
+func metadataURL(c *golangsdk.ServiceClient, id string) string {
+	return c.ServiceURL("volumes", id, "metadata")
+}
+
+// 3.37 3.39 3.41
+func metadataKeyURL(c *golangsdk.ServiceClient, id, key string) string {
+	return c.ServiceURL("volumes", id, "metadata", key)
+}
+

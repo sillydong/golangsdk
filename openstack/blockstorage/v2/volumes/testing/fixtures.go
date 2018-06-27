@@ -329,3 +329,128 @@ func MockUpdateResponse(t *testing.T) {
         `)
 	})
 }
+
+func MockCreateMetadataResponse(t *testing.T) {
+	th.Mux.HandleFunc("/volumes/8dd7c486-8e9f-49fe-bceb-26aa7e312b66/metadata", func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "POST")
+		th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
+		th.TestHeader(t, r, "Content-Type", "application/json")
+		th.TestHeader(t, r, "Accept", "application/json")
+		th.TestJSONRequest(t, r, `
+{
+    "meta": {
+        "key": "val"
+    }
+}
+      `)
+
+		w.Header().Add("Content-Type", "application/json")
+		w.WriteHeader(http.StatusAccepted)
+
+		fmt.Fprintf(w, `
+{
+    "meta": {
+        "key": "val"
+    }
+}
+    `)
+	})
+}
+
+func MockUpdateMetadataResponse(t *testing.T) {
+	th.Mux.HandleFunc("/volumes/8dd7c486-8e9f-49fe-bceb-26aa7e312b66/metadata", func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "PUT")
+		th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
+		th.TestHeader(t, r, "Content-Type", "application/json")
+		th.TestHeader(t, r, "Accept", "application/json")
+		th.TestJSONRequest(t, r, `
+{
+    "meta": {
+        "key": "val"
+    }
+}
+      `)
+
+		w.Header().Add("Content-Type", "application/json")
+		w.WriteHeader(http.StatusAccepted)
+
+		fmt.Fprintf(w, `
+{
+    "meta": {
+        "key": "val"
+    }
+}
+    `)
+	})
+}
+
+func MockGetMetadataResponse(t *testing.T) {
+	th.Mux.HandleFunc("/volumes/8dd7c486-8e9f-49fe-bceb-26aa7e312b66/metadata", func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "GET")
+		th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
+
+		w.Header().Add("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+
+		fmt.Fprintf(w, `
+{
+    "meta": {
+        "key": "val"
+    }
+}
+    `)
+	})
+}
+
+func MockGetMetadataKeyResponse(t *testing.T) {
+	th.Mux.HandleFunc("/volumes/8dd7c486-8e9f-49fe-bceb-26aa7e312b66/metadata/key", func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "GET")
+		th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
+
+		w.Header().Add("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+
+		fmt.Fprintf(w, `
+{
+    "meta": {
+        "key": "val"
+    }
+}
+    `)
+	})
+}
+
+func MockUpdateMetadataKeyResponse(t *testing.T) {
+	th.Mux.HandleFunc("/volumes/8dd7c486-8e9f-49fe-bceb-26aa7e312b66/metadata/key", func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "PUT")
+		th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
+		th.TestHeader(t, r, "Content-Type", "application/json")
+		th.TestHeader(t, r, "Accept", "application/json")
+		th.TestJSONRequest(t, r, `
+{
+    "meta": {
+        "key": "val"
+    }
+}
+      `)
+
+		w.Header().Add("Content-Type", "application/json")
+		w.WriteHeader(http.StatusAccepted)
+
+		fmt.Fprintf(w, `
+{
+    "meta": {
+        "key": "val"
+    }
+}
+    `)
+	})
+}
+
+func MockDeleteMetadataKeyResponse(t *testing.T) {
+	th.Mux.HandleFunc("/volumes/8dd7c486-8e9f-49fe-bceb-26aa7e312b66/metadata/key", func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "DELETE")
+		th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
+		w.WriteHeader(http.StatusAccepted)
+	})
+}

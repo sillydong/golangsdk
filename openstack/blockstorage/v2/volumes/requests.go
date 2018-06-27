@@ -218,3 +218,79 @@ func IDFromName(client *golangsdk.ServiceClient, name string) (string, error) {
 		return "", golangsdk.ErrMultipleResourcesFound{Name: name, Count: count, ResourceType: "volume"}
 	}
 }
+
+// MetadataOptsBuilder allows extensions to add additional parameters to
+// the meatadata requests.
+type MetadataOptsBuilder interface {
+	ToSnapshotMetadataMap() (map[string]interface{}, error)
+}
+
+// MetadataOpts contain options for creating or updating an existing Voulme. This
+// object is passed to the volumes create and update function. For more information
+// about the parameters, see the Volume object.
+type MetadataOpts struct {
+	Metadata map[string]string `json:"meta,omitempty"`
+}
+
+// ToSnapshotMetadataMap assembles a request body based on the contents of
+// an MetadataOpts.
+func (opts MetadataOpts) ToSnapshotMetadataMap() (map[string]interface{}, error) {
+	return golangsdk.BuildRequestBody(opts, "")
+}
+
+// CreateMetadata create metadata for Volume.
+func CreateMetadata(client *golangsdk.ServiceClient, id string, opts MetadataOptsBuilder) (r MetadataResult) {
+	b, err := opts.ToSnapshotMetadataMap()
+	if err != nil {
+		r.Err = err
+		return
+	}
+	_, r.Err = client.Post(metadataURL(client, id), b, &r.Body, &golangsdk.RequestOpts{
+		OkCodes: []int{202},
+	})
+	return
+}
+
+// GetMetadata returns exist metadata of Volume.
+func GetMetadata(client *golangsdk.ServiceClient, id string) (r MetadataResult) {
+	_, r.Err = client.Get(metadataURL(client, id), &r.Body, nil)
+	return
+}
+
+// UpdateMetadata will update metadata according to request map.
+func UpdateMetadata(client *golangsdk.ServiceClient, id string, opts MetadataOptsBuilder) (r MetadataResult) {
+	b, err := opts.ToSnapshotMetadataMap()
+	if err != nil {
+		r.Err = err
+		return
+	}
+	_, r.Err = client.Put(metadataURL(client, id), b, &r.Body, &golangsdk.RequestOpts{
+		OkCodes: []int{202},
+	})
+	return
+}
+
+// GetMetadataKey return specific key value in metadata.
+func GetMetadataKey(client *golangsdk.ServiceClient, id, key string) (r MetadataResult) {
+	_, r.Err = client.Get(metadataKeyURL(client, id, key), &r.Body, nil)
+	return
+}
+
+// UpdateMetadataKey update sepcific key to the given map key value.
+func UpdateMetadataKey(client *golangsdk.ServiceClient, id, key string, opts MetadataOptsBuilder) (r MetadataResult) {
+	b, err := opts.ToSnapshotMetadataMap()
+	if err != nil {
+		r.Err = err
+		return
+	}
+	_, r.Err = client.Put(metadataKeyURL(client, id, key), b, &r.Body, &golangsdk.RequestOpts{
+		OkCodes: []int{202},
+	})
+	return
+}
+
+// DeleteMetadataKey delete specific key in metadata
+func DeleteMetadataKey(client *golangsdk.ServiceClient, id, key string) (r DeleteMetadataKeyResult) {
+	_, r.Err = client.Delete(metadataKeyURL(client, id, key), nil)
+	return
+}
