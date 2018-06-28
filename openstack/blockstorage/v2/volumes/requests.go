@@ -100,18 +100,25 @@ type ListOpts struct {
 
 	// TenantID will filter by a specific tenant/project ID.
 	TenantID string `q:"project_id"`
+
 	// Limit of pagination
 	Limit int `q:"limit"`
+
 	// Sort result by key
 	SortKey string `q:"sort_key"`
+
 	// Sort direction, desc or asc
 	SortDir string `q:"sort_dir"`
+
 	// Offset of pagination
 	Offset int `q:"offset"`
+
 	// Avalibility zone information
 	AvailabilityZone string `q:"availablity_zone"`
+
 	// Query update time of could volume
 	ChangeSince string `q:"change_since"`
+
 	// Last record id of last page
 	Marker string `q:"marker"`
 }
@@ -222,7 +229,7 @@ func IDFromName(client *golangsdk.ServiceClient, name string) (string, error) {
 // MetadataOptsBuilder allows extensions to add additional parameters to
 // the meatadata requests.
 type MetadataOptsBuilder interface {
-	ToSnapshotMetadataMap() (map[string]interface{}, error)
+	ToVolumeMetadataMap() (map[string]interface{}, error)
 }
 
 // MetadataOpts contain options for creating or updating an existing Voulme. This
@@ -234,13 +241,13 @@ type MetadataOpts struct {
 
 // ToSnapshotMetadataMap assembles a request body based on the contents of
 // an MetadataOpts.
-func (opts MetadataOpts) ToSnapshotMetadataMap() (map[string]interface{}, error) {
+func (opts MetadataOpts) ToVolumeMetadataMap() (map[string]interface{}, error) {
 	return golangsdk.BuildRequestBody(opts, "")
 }
 
 // CreateMetadata create metadata for Volume.
 func CreateMetadata(client *golangsdk.ServiceClient, id string, opts MetadataOptsBuilder) (r MetadataResult) {
-	b, err := opts.ToSnapshotMetadataMap()
+	b, err := opts.ToVolumeMetadataMap()
 	if err != nil {
 		r.Err = err
 		return
@@ -259,7 +266,7 @@ func GetMetadata(client *golangsdk.ServiceClient, id string) (r MetadataResult) 
 
 // UpdateMetadata will update metadata according to request map.
 func UpdateMetadata(client *golangsdk.ServiceClient, id string, opts MetadataOptsBuilder) (r MetadataResult) {
-	b, err := opts.ToSnapshotMetadataMap()
+	b, err := opts.ToVolumeMetadataMap()
 	if err != nil {
 		r.Err = err
 		return
@@ -278,7 +285,7 @@ func GetMetadataKey(client *golangsdk.ServiceClient, id, key string) (r Metadata
 
 // UpdateMetadataKey update sepcific key to the given map key value.
 func UpdateMetadataKey(client *golangsdk.ServiceClient, id, key string, opts MetadataOptsBuilder) (r MetadataResult) {
-	b, err := opts.ToSnapshotMetadataMap()
+	b, err := opts.ToVolumeMetadataMap()
 	if err != nil {
 		r.Err = err
 		return
