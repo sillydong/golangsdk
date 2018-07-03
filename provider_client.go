@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"io"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"strings"
 	"sync"
@@ -216,6 +217,8 @@ func (client *ProviderClient) Request(method, url string, options *RequestOpts) 
 	req.Close = true
 
 	prereqtok := req.Header.Get("X-Auth-Token")
+
+	log.Printf("%+v", req)
 
 	// Issue the request.
 	resp, err := client.HTTPClient.Do(req)

@@ -493,3 +493,9 @@ func NewAntiDDoSV2(client *golangsdk.ProviderClient, eo golangsdk.EndpointOpts) 
 	sc.ResourceBase = sc.Endpoint + "v2/" + client.ProjectID + "/"
 	return sc, err
 }
+
+func NewEvsV2(client *golangsdk.ProviderClient, eo golangsdk.EndpointOpts) (*golangsdk.ServiceClient, error) {
+	sc, err := initClientOpts(client, eo, "blockstorage")
+	sc.ResourceBase = sc.Endpoint + "v2/" + client.ProjectID + "/"
+	return sc, err
+}
