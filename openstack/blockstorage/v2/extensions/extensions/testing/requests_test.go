@@ -3,7 +3,7 @@ package testing
 import (
 	"testing"
 
-	"github.com/huaweicloud/golangsdk/openstack/common/extensions"
+	"github.com/huaweicloud/golangsdk/openstack/blockstorage/v2/extensions/extensions"
 	"github.com/huaweicloud/golangsdk/pagination"
 	th "github.com/huaweicloud/golangsdk/testhelper"
 	"github.com/huaweicloud/golangsdk/testhelper/client"

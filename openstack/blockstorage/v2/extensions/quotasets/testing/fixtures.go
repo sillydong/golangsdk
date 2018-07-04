@@ -10,8 +10,7 @@ import (
 )
 
 func MockGetUsageResponse(t *testing.T) {
-	fmt.Println("/os-quota-sets/" + FirstTenantID + "?usage=true")
-	th.Mux.HandleFunc("/os-quota-sets/"+FirstTenantID+"?usage=true", func(w http.ResponseWriter, r *http.Request) {
+	th.Mux.HandleFunc("/os-quota-sets/"+FirstTenantID, func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "GET")
 		th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
 
