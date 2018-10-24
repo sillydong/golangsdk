@@ -21,6 +21,10 @@ type VolumeType struct {
 	QosSpecID         string `json:"qos_specs_id"`
 	VolumeBackendName string `json:"volume_backend_name"`
 	AvailabilityZone  string `json:"availability-zone"`
+	// Availability Zone list which support this type of volume
+	RESKEYAvailabilityZone string `json:"RESKEY:availability_zone"`
+	// Availability Zone list which sold out
+	OSVenderExtendedSoldOutAvailabilityZones string `json:"os-vender-extended:sold_out_availability_zones"`
 }
 
 // VolumeTypePage is a pagination.pager that is returned from a call to the List function.
