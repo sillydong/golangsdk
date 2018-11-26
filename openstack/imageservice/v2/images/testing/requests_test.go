@@ -55,7 +55,7 @@ func TestListCloudImage(t *testing.T) {
 
 	t.Logf("Id\tName\tOwner\tChecksum\tSizeBytes")
 
-	pager := images.List(fakeclient.ServiceClient(), images.ListOpts{Limit: 1})
+	pager := images.ListCloudImages(fakeclient.ServiceClient(), images.ListOpts{Limit: 1})
 	t.Logf("Pager state %v", pager)
 	count, pages := 0, 0
 	err := pager.EachPage(func(page pagination.Page) (bool, error) {
@@ -343,7 +343,7 @@ func TestUpdateCloudImage(t *testing.T) {
 
 	HandleCloudImageUpdateSuccessfully(t)
 
-	actualImage, err := images.Update(fakeclient.ServiceClient(), "da3b75d9-3f4a-40e7-8a2c-bfab23927dea", images.UpdateOpts{
+	actualImage, err := images.UpdateCloudImage(fakeclient.ServiceClient(), "da3b75d9-3f4a-40e7-8a2c-bfab23927dea", images.UpdateOpts{
 		images.ReplaceImageName{NewName: "Fedora 17"},
 		images.ReplaceImageTags{NewTags: []string{"fedora", "beefy"}},
 	}).Extract()

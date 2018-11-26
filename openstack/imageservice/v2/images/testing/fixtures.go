@@ -295,9 +295,9 @@ func HandleCloudImageListSuccessfully(t *testing.T) {
 		fmt.Fprintf(w, strings.Join(imageJSON, ","))
 
 		fmt.Fprintf(w, `],
-			    "next": "/images?marker=%s&limit=%v",
+			    "next": "/cloudimages?marker=%s&limit=%v",
 			    "schema": "/schemas/images",
-			    "first": "/images?limit=%v"}`, newMarker, limit, limit)
+			    "first": "/cloudimages?limit=%v"}`, newMarker, limit, limit)
 
 	})
 }
