@@ -12,6 +12,8 @@ func listURL(c *golangsdk.ServiceClient) string {
 	return c.ServiceURL("images")
 }
 
+// `listCloudImagesURL` is a pure function. `listCloudImagesURL(c)` is a URL for
+// which a GET request will respond with a list of images in the service `c`.
 func listCloudImagesURL(c *golangsdk.ServiceClient) string {
 	return c.ServiceURL("cloudimages")
 }
