@@ -88,6 +88,45 @@ type ListOpts struct {
 	// Multiple disk formats can be specified by constructing a string
 	// such as "in:qcow2,iso".
 	DiskFormat string `q:"disk_format"`
+
+	// Specifies the minimum memory size (MD) required for running the image.
+	MinRam int `q:"min_ram"`
+
+	// Specifies the minimum disk space (GB) required for running the image.
+	MinDisk int `q:"min_disk"`
+
+	// Specifies the number of bits in the operating system: 32 or 64
+	OsBit string `q:"__os_bit"`
+
+	// Specifies the image platform type.
+	Platform string `q:"__platform"`
+
+	// Specifies the operating system type: Linux, Windows or Other
+	OsType string `q:"__os_type"`
+
+	// Specifies the user tag filter
+	Tag string `q:"tag"`
+
+	// Specifies whether or not the image should support KVM, true or omitted
+	SupportKVM bool `q:"__support_kvm"`
+
+	// Specifies whether or not the image should support Xen, true or omitted
+	SupportXen bool `q:"__support_xen"`
+
+	// Specifies whether or not the image should support crowded storing
+	SupportDiskIntensive string `q:"__support_diskintensive"`
+
+	// Specifies whether or not the image should support high performance
+	SupportHighPerformance string `q:"__support_highperformance"`
+
+	// Specifies the supporting Xen gpu type
+	SupportXenGPUType string `q:"__support_xen_gpu_type"`
+
+	// Specifies the virtual environment type: FusionCompute, Ironic or DataImage
+	VirtualEnvType string `q:"virtual_env_type"`
+
+	// Specifies the enterprise project ID which the image should belong to
+	EnterpriseProjectID string `q:"enterprise_project_id"`
 }
 
 // ToImageListQuery formats a ListOpts into a query string.
