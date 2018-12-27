@@ -7,9 +7,12 @@ func operateTagList(client *golangsdk.ServiceClient, id string) string {
 }
 
 var (
-	listTags    = operateTagList
+	// listTags generate url to list tags
+	listTags = operateTagList
+	// replaceTags generate url to replace tags
 	replaceTags = operateTagList
-	deleteTags  = operateTagList
+	// deleteTags generate url to delete all tags
+	deleteTags = operateTagList
 )
 
 func operateTag(client *golangsdk.ServiceClient, id, tag string) string {
@@ -17,7 +20,10 @@ func operateTag(client *golangsdk.ServiceClient, id, tag string) string {
 }
 
 var (
-	checkTag  = operateTag
-	addTag    = operateTag
+	// checkTag generate url to check tag existence
+	checkTag = operateTag
+	// addTag generate url to add a single tag
+	addTag = operateTag
+	// deleteTag generate url to delete a single tag
 	deleteTag = operateTag
 )

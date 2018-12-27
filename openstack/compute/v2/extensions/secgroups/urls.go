@@ -27,6 +27,7 @@ func resourceRuleURL(c *golangsdk.ServiceClient, id string) string {
 	return c.ServiceURL(rulepath, id)
 }
 
+// serverActionURL generate a url to do some actions of server
 func serverActionURL(c *golangsdk.ServiceClient, id string) string {
 	return c.ServiceURL("servers", id, "action")
 }

@@ -28,10 +28,12 @@ func serverURL(c *golangsdk.ServiceClient, serverID string) string {
 	return c.ServiceURL("servers/" + serverID + "/action")
 }
 
+// associateURL generate a url to associate floating ip with server
 func associateURL(c *golangsdk.ServiceClient, serverID string) string {
 	return serverURL(c, serverID)
 }
 
+// disassociateURL generate a url to disassociate floating ip with server
 func disassociateURL(c *golangsdk.ServiceClient, serverID string) string {
 	return serverURL(c, serverID)
 }

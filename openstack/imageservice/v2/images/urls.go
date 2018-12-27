@@ -18,6 +18,7 @@ func listCloudImagesURL(c *golangsdk.ServiceClient) string {
 	return c.ServiceURL("cloudimages")
 }
 
+// createURL generates a url for creating the metadata of an image
 func createURL(c *golangsdk.ServiceClient) string {
 	return c.ServiceURL("images")
 }
@@ -35,14 +36,18 @@ func getURL(c *golangsdk.ServiceClient, imageID string) string {
 	return imageURL(c, imageID)
 }
 
+// updateURL update the attributes of image
 func updateURL(c *golangsdk.ServiceClient, imageID string) string {
 	return imageURL(c, imageID)
 }
 
+// `updateCloudImageURL` is a function to generate a url for update image
+// attributes
 func updateCloudImageURL(c *golangsdk.ServiceClient, imageID string) string {
 	return c.ServiceURL("cloudimages", imageID)
 }
 
+// `deleteURL` is a function to generate a url for image deletion
 func deleteURL(c *golangsdk.ServiceClient, imageID string) string {
 	return imageURL(c, imageID)
 }
@@ -60,10 +65,12 @@ func nextPageURL(currentURL string, next string) (string, error) {
 	return base.ResolveReference(rel).String(), nil
 }
 
+// putTagURL add a tag to the image
 func putTagURL(c *golangsdk.ServiceClient, imageID, tag string) string {
 	return c.ServiceURL("images", imageID, "tags", tag)
 }
 
+// deleteTagURL remove the tag from a image
 func deleteTagURL(c *golangsdk.ServiceClient, imageID, tag string) string {
 	return c.ServiceURL("images", imageID, "tags", tag)
 }

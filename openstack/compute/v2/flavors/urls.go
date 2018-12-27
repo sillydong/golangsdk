@@ -2,14 +2,17 @@ package flavors
 
 import "github.com/huaweicloud/golangsdk"
 
+// getURL generate URL to get flavor detail
 func getURL(client *golangsdk.ServiceClient, id string) string {
 	return client.ServiceURL("flavors", id)
 }
 
+// detailURL generate URL for listing flavor details
 func detailURL(client *golangsdk.ServiceClient) string {
 	return client.ServiceURL("flavors", "detail")
 }
 
+// listURL generate URL to list flavors
 func listURL(client *golangsdk.ServiceClient) string {
 	return client.ServiceURL("flavors")
 }
@@ -30,6 +33,7 @@ func listURL(client *golangsdk.ServiceClient) string {
 // 	return client.ServiceURL("flavors", id, "action")
 // }
 
+// extraSpecsListURL generate URL to list all extra specs for a flavor
 func extraSpecsListURL(client *golangsdk.ServiceClient, id string) string {
 	return client.ServiceURL("flavors", id, "os-extra_specs")
 }
