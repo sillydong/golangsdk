@@ -79,3 +79,15 @@ func Update(client *golangsdk.ServiceClient, imageID string, memberID string, op
 		&golangsdk.RequestOpts{OkCodes: []int{200}})
 	return
 }
+
+// GetMemberSchemas get the member schemas
+func GetMemberSchemas(client *golangsdk.ServiceClient) (r MemberSchemasResult) {
+	_, r.Err = client.Get(getMemberSchemas(client), &r.Body, nil)
+	return
+}
+
+// GetMembersSchemas get the members schemas
+func GetMembersSchemas(client *golangsdk.ServiceClient) (r MembersSchemasResult) {
+	_, r.Err = client.Get(getMembersSchemas(client), &r.Body, nil)
+	return
+}

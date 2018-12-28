@@ -208,3 +208,66 @@ func ExtractImages(r pagination.Page) ([]Image, error) {
 	err := (r.(ImagePage)).ExtractInto(&s)
 	return s.Images, err
 }
+
+// ImageSchemas presents the result of getting image schemas request
+type ImageSchemas struct {
+	// AdditionalProperties presents the additional properties
+	AdditionalProperties map[string]string `json:"additionalProperties"`
+	// Name is the name of schemas
+	Name string `json:"name"`
+	// Links is the links of schemas
+	Links []map[string]string `json:"links"`
+	// Properties is the explaination of schemas properties
+	Properties *json.RawMessage `json:"properties"`
+}
+
+// ImageSchemasResult represents the result of Image schemas request
+type ImageSchemasResult struct {
+	golangsdk.Result
+}
+
+// Extract interprets the result as an ImageSchemas
+func (r ImageSchemasResult) Extract() (*ImageSchemas, error) {
+	var s *ImageSchemas
+	err := r.ExtractInto(&s)
+	return s, err
+}
+
+// ImagesSchemas presents the result of getting images schemas request
+type ImagesSchemas struct {
+	// Name is the name of schemas
+	Name string `json:"name"`
+	// Links is the links of schemas
+	Links []map[string]string `json:"links"`
+	// Properties is the explaination of schemas properties
+	Properties *json.RawMessage `json:"properties"`
+}
+
+// ImagesSchemasResult represents the result of Images schemas request
+type ImagesSchemasResult struct {
+	golangsdk.Result
+}
+
+// Extract interprets the result as an ImagesSchemas
+func (r ImagesSchemasResult) Extract() (*ImagesSchemas, error) {
+	var s *ImagesSchemas
+	err := r.ExtractInto(&s)
+	return s, err
+}
+
+// CloudImageCreatingJob represents the job of image creating task
+type CloudImageCreatingJob struct {
+	JobID string `json:"job_id"`
+}
+
+// CloudImageCreatingResult represents the result of image creating
+type CloudImageCreatingResult struct {
+	golangsdk.Result
+}
+
+// Extract interprets the result as a CloudImageCreatingJob
+func (r CloudImageCreatingResult) Extract() (*CloudImageCreatingJob, error) {
+	var s *CloudImageCreatingJob
+	err := r.ExtractInto(&s)
+	return s, err
+}

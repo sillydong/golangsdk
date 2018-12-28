@@ -47,6 +47,11 @@ func updateCloudImageURL(c *golangsdk.ServiceClient, imageID string) string {
 	return c.ServiceURL("cloudimages", imageID)
 }
 
+// actionCloudImageURL generate url to do the action of cloudimages
+func actionCloudImageURL(c *golangsdk.ServiceClient) string {
+	return c.ServiceURL("cloudimages", "action")
+}
+
 // `deleteURL` is a function to generate a url for image deletion
 func deleteURL(c *golangsdk.ServiceClient, imageID string) string {
 	return imageURL(c, imageID)
@@ -73,4 +78,14 @@ func putTagURL(c *golangsdk.ServiceClient, imageID, tag string) string {
 // deleteTagURL remove the tag from a image
 func deleteTagURL(c *golangsdk.ServiceClient, imageID, tag string) string {
 	return c.ServiceURL("images", imageID, "tags", tag)
+}
+
+// getImageSchemas generate url to get image schemas
+func getImageSchemas(c *golangsdk.ServiceClient) string {
+	return c.ServiceURL("schemas", "image")
+}
+
+// getImagesSchemas generate url to get images schemas
+func getImagesSchemas(c *golangsdk.ServiceClient) string {
+	return c.ServiceURL("schemas", "images")
 }

@@ -1,6 +1,7 @@
 package images
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/url"
 	"time"
@@ -396,5 +397,96 @@ func DeleteTag(client *golangsdk.ServiceClient, id, tag string) (r DeleteTagResu
 	_, r.Err = client.Delete(deleteTagURL(client, id, tag), &golangsdk.RequestOpts{
 		OkCodes: []int{204},
 	})
+	return
+}
+
+// GetImageSchemas get the image schemas
+func GetImageSchemas(client *golangsdk.ServiceClient) (r ImageSchemasResult) {
+	_, r.Err = client.Get(getImageSchemas(client), &r.Body, nil)
+	return
+}
+
+// GetImagesSchemas get the image schemas
+func GetImagesSchemas(client *golangsdk.ServiceClient) (r ImagesSchemasResult) {
+	_, r.Err = client.Get(getImagesSchemas(client), &r.Body, nil)
+	return
+}
+
+// ImageCreatingOptsBuilder allows extensions to add parameters to the Create
+// request.
+type ImageCreatingOptsBuilder interface {
+	ToImageCreatingMap() (map[string]interface{}, error)
+}
+
+// ImageCreatingOptsFromCloud represents options used to create an image.
+type ImageCreatingOptsFromCloud struct {
+	// Name is the name of the new image
+	Name string `json:"name" required:"true"`
+	// Description is the description of the image
+	Description string `json:"description,omitempty"`
+	// InstanceID is the instance id of cloud server
+	InstanceID string `json:"instance_id" required:"true"`
+	// DataImages is the data images in the cloud server which needs to be
+	// transform
+	DataImages []json.RawMessage `json:"data_images,omitempty"`
+	// Tags is the tag list of the image
+	Tags []string `json:"tags,omitempty"`
+	// ImageTags is the new image tag list
+	ImageTags []map[string]string `json:"image_tags,omitempty"`
+	// EnterpriseProjectID is the project id of this image belongs to
+	EnterpriseProjectID string `json:"enterprise_project_id,omitempty"`
+	// MaxRam is the maximum ram
+	MaxRam int `json:"max_ram,omitempty"`
+	// MinRam is the minmum ram
+	MinRam int `json:"min_ram,omitempty"`
+}
+
+// ToImageCreatingMap assembles a request body based on the contents
+func (opts ImageCreatingOptsFromCloud) ToImageCreatingMap() (map[string]interface{}, error) {
+	return golangsdk.BuildRequestBody(opts, "")
+}
+
+type ImageCreatingOptsFromOBS struct {
+	// Name is the name of the new image
+	Name string `json:"name" required:"true"`
+	// Description is the description of the image
+	Description string `json:"description,omitempty"`
+	// OSVersion is the operating system version
+	OSVersion string `json:"os_version,omitempty"`
+	// ImageURL is the OBS image file location
+	ImageURL string `json:"image_url" required:"true"`
+	// MinDisk is the amount of disk space in GB
+	MinDisk int `json:"min_disk" required:"true"`
+	// IsConfig specify whether or not automatically config
+	IsConfig bool `json:"is_config,omitempty"`
+	// CMKID is the primary key
+	CMKID string `json:"cmd_id,omitempty"`
+	// Type is the image type ECS,BMS,FusionCompute,Ironic
+	Type string `json:"type,omitempty"`
+	// Tags is the tag list of the image
+	Tags []string `json:"tags,omitempty"`
+	// ImageTags is the new image tag list
+	ImageTags []map[string]string `json:"image_tags,omitempty"`
+	// EnterpriseProjectID is the project id of this image belongs to
+	EnterpriseProjectID string `json:"enterprise_project_id,omitempty"`
+	// MaxRam is the maximum ram
+	MaxRam int `json:"max_ram,omitempty"`
+	// MinRam is the minmum ram
+	MinRam int `json:"min_ram,omitempty"`
+}
+
+// ToImageCreatingMap assembles a request body based on the contents
+func (opts ImageCreatingOptsFromOBS) ToImageCreatingMap() (map[string]interface{}, error) {
+	return golangsdk.BuildRequestBody(opts, "")
+}
+
+// CreateCloudImage create the cloud image
+func CreateCloudImage(client *golangsdk.ServiceClient, opts ImageCreatingOptsBuilder) (r CloudImageCreatingResult) {
+	b, err := opts.ToImageCreatingMap()
+	if err != nil {
+		r.Err = err
+		return r
+	}
+	_, r.Err = client.Post(actionCloudImageURL(client), b, &r.Body, nil)
 	return
 }

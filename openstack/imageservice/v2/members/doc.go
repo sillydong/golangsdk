@@ -54,5 +54,19 @@ Example to Delete a Member from an Image
 	if err != nil {
 		panic(err)
 	}
+
+Example to Get a Member Schemas
+
+	schemas, err := members.GetMemberSchemas(memberClient).Extract()
+	if err != nil {
+		panic(err)
+	}
+
+Example to Get a Members Schemas
+
+	schemas, err := members.GetMembersSchemas(memberClient).Extract()
+	if err != nil {
+		panic(err)
+	}
 */
 package members

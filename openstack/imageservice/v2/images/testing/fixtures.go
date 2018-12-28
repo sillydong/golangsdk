@@ -602,3 +602,19 @@ func HandleImageTagDeleteSuccessfully(t *testing.T) {
 		w.WriteHeader(http.StatusNoContent)
 	})
 }
+
+// HandleImageSchemasGet test setup
+func HandleImageSchemasGet(t *testing.T) {
+	th.Mux.HandleFunc("/schemas/image", func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "GET")
+		w.WriteHeader(http.StatusOK)
+	})
+}
+
+// HandleImagesSchemasGet test setup
+func HandleImagesSchemasGet(t *testing.T) {
+	th.Mux.HandleFunc("/schemas/images", func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "GET")
+		w.WriteHeader(http.StatusOK)
+	})
+}

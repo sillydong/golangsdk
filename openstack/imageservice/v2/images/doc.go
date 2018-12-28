@@ -74,5 +74,19 @@ Example to Delete a Tag from an Image
 	if err != nil {
 		panic(err)
 	}
+
+Example to Get a Image Schemas
+
+	schemas, err := images.GetImageSchemas(imageClient).Extract()
+	if err != nil {
+		panic(err)
+	}
+
+Example to Get a Images Schemas
+
+	schemas, err := images.GetImagesSchemas(imageClient).Extract()
+	if err != nil {
+		panic(err)
+	}
 */
 package images

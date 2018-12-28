@@ -34,3 +34,8 @@ func copyImageURL(c *golangsdk.ServiceClient, imageID string) string {
 func imageMemberOpURL(c *golangsdk.ServiceClient) string {
 	return c.ServiceURL("cloudimages", "members")
 }
+
+// getCloudImagesQuota generate a URL for query the quota of cloud images
+func getCloudImagesQuota(c *golangsdk.ServiceClient) string {
+	return c.ServiceURL("cloudimages", "quota")
+}

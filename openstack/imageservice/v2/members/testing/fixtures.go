@@ -136,3 +136,19 @@ func HandleImageMemberUpdate(t *testing.T) *CallsCounter {
 type CallsCounter struct {
 	Counter int
 }
+
+// HandleMemberSchemasGet test setup
+func HandleMemberSchemasGet(t *testing.T) {
+	th.Mux.HandleFunc("/schemas/member", func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "GET")
+		w.WriteHeader(http.StatusOK)
+	})
+}
+
+// HandleMembersSchemasGet test setup
+func HandleMembersSchemasGet(t *testing.T) {
+	th.Mux.HandleFunc("/schemas/members", func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "GET")
+		w.WriteHeader(http.StatusOK)
+	})
+}

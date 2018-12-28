@@ -498,3 +498,23 @@ func TestDeleteImageTag(t *testing.T) {
 	r := images.DeleteTag(fakeclient.ServiceClient(), "imageID", "imageTag")
 	th.AssertNoErr(t, r.Err)
 }
+
+func TestGetImageSchemas(t *testing.T) {
+
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+
+	HandleImageSchemasGet(t)
+	_, err := images.GetImageSchemas(fakeclient.ServiceClient()).Extract()
+	th.AssertNoErr(t, err)
+}
+
+func TestGetImagesSchemas(t *testing.T) {
+
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+
+	HandleImagesSchemasGet(t)
+	_, err := images.GetImagesSchemas(fakeclient.ServiceClient()).Extract()
+	th.AssertNoErr(t, err)
+}

@@ -34,3 +34,13 @@ func updateMemberURL(c *golangsdk.ServiceClient, imageID string, memberID string
 func deleteMemberURL(c *golangsdk.ServiceClient, imageID string, memberID string) string {
 	return imageMemberURL(c, imageID, memberID)
 }
+
+// getMemberSchemas generate a url to get member schemas
+func getMemberSchemas(c *golangsdk.ServiceClient) string {
+	return c.ServiceURL("schemas", "member")
+}
+
+// getMembersSchemas generate a url to get member schemas
+func getMembersSchemas(c *golangsdk.ServiceClient) string {
+	return c.ServiceURL("schemas", "members")
+}

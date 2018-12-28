@@ -187,3 +187,9 @@ func DeleteImageMembers(client *golangsdk.ServiceClient, opts DeleteImageMembers
 	_, r.Err = client.Delete3(imageMemberOpURL(client), b, nil, &golangsdk.RequestOpts{OkCodes: []int{http.StatusOK}})
 	return
 }
+
+// GetQuota get the quota of cloud image
+func GetQuota(client *golangsdk.ServiceClient) (r CloudImagesQuotaResult) {
+	_, r.Err = client.Get(getCloudImagesQuota(client), &r.Body, nil)
+	return r
+}

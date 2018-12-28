@@ -170,3 +170,23 @@ func TestMemberUpdateSuccessfully(t *testing.T) {
 	}, *im)
 
 }
+
+func TestGetMemberSchemas(t *testing.T) {
+
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+
+	HandleMemberSchemasGet(t)
+	_, err := members.GetMemberSchemas(fakeclient.ServiceClient()).Extract()
+	th.AssertNoErr(t, err)
+}
+
+func TestGetMembersSchemas(t *testing.T) {
+
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+
+	HandleMembersSchemasGet(t)
+	_, err := members.GetMembersSchemas(fakeclient.ServiceClient()).Extract()
+	th.AssertNoErr(t, err)
+}

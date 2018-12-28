@@ -109,3 +109,29 @@ func (r DeleteImageMembersResult) Extract() (*DeleteImageMembersTask, error) {
 	err := r.ExtractInto(&t)
 	return t, err
 }
+
+// CloudImagesQuota represents the quota of cloud images
+type CloudImagesQuota struct {
+	// Type is the resource type
+	Type string `json:"type"`
+	// Used is the amount of used resource
+	Used int `json:"used"`
+	// Quota is the amount of all resource
+	Quota int `json:"quota"`
+	// Min is the minimum of resource
+	Min int `json:"min"`
+	// Max is the maximum of resource
+	Max int `json:"max"`
+}
+
+// CloudImagesQuotaResult represents the result of cloud image quota request
+type CloudImagesQuotaResult struct {
+	golangsdk.Result
+}
+
+// Extract extracts the result to CloudImagesQuota
+func (r CloudImagesQuotaResult) Extract() (*CloudImagesQuota, error) {
+	var s *CloudImagesQuota
+	err := r.ExtractInto(&s)
+	return s, err
+}
