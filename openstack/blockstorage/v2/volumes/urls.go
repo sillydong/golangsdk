@@ -2,47 +2,56 @@ package volumes
 
 import "github.com/huaweicloud/golangsdk"
 
-// 3.3
+// `createURL` is a pure function. `createURL(c)` is a URL for which a POST
+// request will response with a blockstorage struct in the service `c`.
 func createURL(c *golangsdk.ServiceClient) string {
 	return c.ServiceURL("volumes")
 }
 
-// 3.13
+// `listURL` is a pure function. `listURL(c)` is a URL for which a GET request
+// will response with a list of blockstorages in the service `c`.
 func listURL(c *golangsdk.ServiceClient) string {
 	return c.ServiceURL("volumes")
 }
 
-// 3.18
+// `detailURL` is a pure function. `detailURL(c)` is a URL for which a GET
+// request will response with detail of blockstorage in the service `c`.
 func detailURL(c *golangsdk.ServiceClient) string {
 	return c.ServiceURL("volumes", "detail")
 }
 
-// 3.7
+// `deleteURL` is a pure function. `deleteURL(c)` is a URL for which a DELETE
+// request will response with a status code in the service  `c`.
 func deleteURL(c *golangsdk.ServiceClient, id string) string {
 	return c.ServiceURL("volumes", id)
 }
 
-// 3.23
+// `getURL` is a pure function. `getURL(c)` is a URL for which a GET request
+// will response with a blockstorage in the service  `c`.
 func getURL(c *golangsdk.ServiceClient, id string) string {
 	return deleteURL(c, id)
 }
 
-// 3.10
+// `updateURL` is a pure function. `updateURL(c)` is a URL for which a PUT
+// request will response with a update blockstorage in the service `c`.
 func updateURL(c *golangsdk.ServiceClient, id string) string {
 	return deleteURL(c, id)
 }
 
-// 3.31 3.33 3.35
+// `metadataURL` is a pure function. `metadataURL(c)` is a URL for which a GET
+// request will response with metadatas in the service `c`
 func metadataURL(c *golangsdk.ServiceClient, id string) string {
 	return c.ServiceURL("volumes", id, "metadata")
 }
 
-// 3.37 3.39 3.41
+// `metadataKeyURL` is a pure function. `metadataKeyURL(c, id, key)` is a URL
+// for which a GET request will response with value of metadata.
 func metadataKeyURL(c *golangsdk.ServiceClient, id, key string) string {
 	return c.ServiceURL("volumes", id, "metadata", key)
 }
 
-// 4.1 4.9
+// `actionURL` is a pure function. `actionURL(c, id)` is a URL for which a POST
+// request will response with a status code.
 func actionURL(c *golangsdk.ServiceClient, id string) string {
 	return c.ServiceURL("volumes", id, "action")
 }

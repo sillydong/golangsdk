@@ -16,6 +16,7 @@ func createMemberURL(c *golangsdk.ServiceClient, imageID string) string {
 	return imageMembersURL(c, imageID)
 }
 
+// imageMemberURL generate a URL for  getting a image member
 func imageMemberURL(c *golangsdk.ServiceClient, imageID string, memberID string) string {
 	return c.ServiceURL("images", imageID, "members", memberID)
 }
