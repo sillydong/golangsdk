@@ -270,9 +270,14 @@ func Assign(client *golangsdk.ServiceClient, roleID string, opts AssignOpts) (r 
 		actorType = "groups"
 	}
 
-	_, r.Err = client.Put(assignURL(client, targetType, targetID, actorType, actorID, roleID), nil, nil, &golangsdk.RequestOpts{
-		OkCodes: []int{204},
-	})
+	_, r.Err = client.Put(
+		assignURL(client, targetType, targetID, actorType, actorID, roleID),
+		nil,
+		nil,
+		&golangsdk.RequestOpts{
+			OkCodes: []int{204},
+		},
+	)
 	return
 }
 
@@ -307,9 +312,12 @@ func Unassign(client *golangsdk.ServiceClient, roleID string, opts UnassignOpts)
 		actorType = "groups"
 	}
 
-	_, r.Err = client.Delete(assignURL(client, targetType, targetID, actorType, actorID, roleID), &golangsdk.RequestOpts{
-		OkCodes: []int{204},
-	})
+	_, r.Err = client.Delete(
+		assignURL(client, targetType, targetID, actorType, actorID, roleID),
+		&golangsdk.RequestOpts{
+			OkCodes: []int{204},
+		},
+	)
 	return
 }
 

@@ -1,8 +1,9 @@
 package cloudimages
 
 import (
-	"github.com/huaweicloud/golangsdk"
 	"net/http"
+
+	"github.com/huaweicloud/golangsdk"
 )
 
 // ListImageTagsOpts is the options for list image tags operation
@@ -62,19 +63,25 @@ func SetImageTag(client *golangsdk.ServiceClient, opts SetImageTagOpts) (r SetIm
 		return
 	}
 
-	_, r.Err = client.Put(putImageTagsURL(client), b, nil, &golangsdk.RequestOpts{OkCodes: []int{http.StatusNoContent}})
+	_, r.Err = client.Put(putImageTagsURL(client), b, nil, &golangsdk.RequestOpts{
+		OkCodes: []int{http.StatusNoContent}})
 	return
 }
 
 // ImportImage import an image from OBS bucket to the huawei cloud
 func ImportImage(client *golangsdk.ServiceClient, imageID, imageURL string) (r ImportResult) {
-	_, r.Err = client.Put(importImageURL(client, imageID), map[string]string{"image_url": imageURL}, nil, &golangsdk.RequestOpts{OkCodes: []int{http.StatusOK}})
+	_, r.Err = client.Put(importImageURL(client, imageID), map[string]string{
+		"image_url": imageURL,
+	}, nil, &golangsdk.RequestOpts{OkCodes: []int{http.StatusOK}})
 	return
 }
 
 // ExportImage export an image from huawei cloud to OBS bucket
 func ExportImage(client *golangsdk.ServiceClient, imageID, bucketURL, fileFormat string) (r ExportResult) {
-	_, r.Err = client.Post(exportImageURL(client, imageID), map[string]string{"bucket_url": bucketURL, "file_format": fileFormat}, nil, &golangsdk.RequestOpts{OkCodes: []int{http.StatusOK}})
+	_, r.Err = client.Post(exportImageURL(client, imageID), map[string]string{
+		"bucket_url":  bucketURL,
+		"file_format": fileFormat,
+	}, nil, &golangsdk.RequestOpts{OkCodes: []int{http.StatusOK}})
 	return
 }
 
@@ -102,7 +109,12 @@ func CopyImage(client *golangsdk.ServiceClient, imageID string, opts CopyImageOp
 		return
 	}
 
-	_, r.Err = client.Post(copyImageURL(client, imageID), b, nil, &golangsdk.RequestOpts{OkCodes: []int{http.StatusOK}})
+	_, r.Err = client.Post(
+		copyImageURL(client, imageID),
+		b,
+		nil,
+		&golangsdk.RequestOpts{OkCodes: []int{http.StatusOK}},
+	)
 	return
 }
 
@@ -128,7 +140,12 @@ func AddImageMembers(client *golangsdk.ServiceClient, opts AddImageMembersOpts) 
 		return
 	}
 
-	_, r.Err = client.Post(imageMemberOpURL(client), b, nil, &golangsdk.RequestOpts{OkCodes: []int{http.StatusOK}})
+	_, r.Err = client.Post(
+		imageMemberOpURL(client),
+		b,
+		nil,
+		&golangsdk.RequestOpts{OkCodes: []int{http.StatusOK}},
+	)
 	return
 }
 
@@ -157,7 +174,12 @@ func UpdateImageMember(client *golangsdk.ServiceClient, opts UpdateImageMemberOp
 		return
 	}
 
-	_, r.Err = client.Put(imageMemberOpURL(client), b, nil, &golangsdk.RequestOpts{OkCodes: []int{http.StatusOK}})
+	_, r.Err = client.Put(
+		imageMemberOpURL(client),
+		b,
+		nil,
+		&golangsdk.RequestOpts{OkCodes: []int{http.StatusOK}},
+	)
 	return
 }
 
@@ -184,7 +206,12 @@ func DeleteImageMembers(client *golangsdk.ServiceClient, opts DeleteImageMembers
 		return
 	}
 
-	_, r.Err = client.Delete3(imageMemberOpURL(client), b, nil, &golangsdk.RequestOpts{OkCodes: []int{http.StatusOK}})
+	_, r.Err = client.Delete3(
+		imageMemberOpURL(client),
+		b,
+		nil,
+		&golangsdk.RequestOpts{OkCodes: []int{http.StatusOK}},
+	)
 	return
 }
 

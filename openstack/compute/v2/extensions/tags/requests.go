@@ -12,9 +12,14 @@ func ListTags(client *golangsdk.ServiceClient, id string) (r ListResult) {
 
 // PutTags put tags to server specified by id
 func PutTags(client *golangsdk.ServiceClient, id string, tags ...string) error {
-	_, err := client.Put(replaceTags(client, id), map[string][]string{"tags": tags}, nil, &golangsdk.RequestOpts{
-		OkCodes: []int{200},
-	})
+	_, err := client.Put(
+		replaceTags(client, id),
+		map[string][]string{"tags": tags},
+		nil,
+		&golangsdk.RequestOpts{
+			OkCodes: []int{200},
+		},
+	)
 	return err
 }
 

@@ -46,7 +46,10 @@ func Get(client *golangsdk.ServiceClient, imageID string, memberID string) (r De
 
 // Delete membership for given image. Callee should be image owner.
 func Delete(client *golangsdk.ServiceClient, imageID string, memberID string) (r DeleteResult) {
-	_, r.Err = client.Delete(deleteMemberURL(client, imageID, memberID), &golangsdk.RequestOpts{OkCodes: []int{204}})
+	_, r.Err = client.Delete(
+		deleteMemberURL(client, imageID, memberID),
+		&golangsdk.RequestOpts{OkCodes: []int{204}},
+	)
 	return
 }
 

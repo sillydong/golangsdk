@@ -222,7 +222,11 @@ func IDFromName(client *golangsdk.ServiceClient, name string) (string, error) {
 	case 1:
 		return id, nil
 	default:
-		return "", golangsdk.ErrMultipleResourcesFound{Name: name, Count: count, ResourceType: "volume"}
+		return "", golangsdk.ErrMultipleResourcesFound{
+			Name:         name,
+			Count:        count,
+			ResourceType: "volume",
+		}
 	}
 }
 

@@ -280,8 +280,10 @@ func Update(client *golangsdk.ServiceClient, id string, opts UpdateOptsBuilder) 
 		return r
 	}
 	_, r.Err = client.Patch(updateURL(client, id), b, &r.Body, &golangsdk.RequestOpts{
-		OkCodes:     []int{200},
-		MoreHeaders: map[string]string{"Content-Type": "application/openstack-images-v2.1-json-patch"},
+		OkCodes: []int{200},
+		MoreHeaders: map[string]string{
+			"Content-Type": "application/openstack-images-v2.1-json-patch",
+		},
 	})
 	return
 }
@@ -294,8 +296,10 @@ func UpdateCloudImage(client *golangsdk.ServiceClient, id string, opts UpdateOpt
 		return r
 	}
 	_, r.Err = client.Patch(updateCloudImageURL(client, id), b, &r.Body, &golangsdk.RequestOpts{
-		OkCodes:     []int{200},
-		MoreHeaders: map[string]string{"Content-Type": "application/openstack-images-v2.1-json-patch"},
+		OkCodes: []int{200},
+		MoreHeaders: map[string]string{
+			"Content-Type": "application/openstack-images-v2.1-json-patch",
+		},
 	})
 	return
 }

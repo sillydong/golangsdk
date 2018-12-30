@@ -107,7 +107,11 @@ func Delete(client *golangsdk.ServiceClient, id string) (r DeleteResult) {
 
 // ListRoles lists the existing roles that can be assigned to users.
 func ListRoles(client *golangsdk.ServiceClient, tenantID, userID string) pagination.Pager {
-	return pagination.NewPager(client, listRolesURL(client, tenantID, userID), func(r pagination.PageResult) pagination.Page {
-		return RolePage{pagination.SinglePageBase(r)}
-	})
+	return pagination.NewPager(
+		client,
+		listRolesURL(client, tenantID, userID),
+		func(r pagination.PageResult) pagination.Page {
+			return RolePage{pagination.SinglePageBase(r)}
+		},
+	)
 }

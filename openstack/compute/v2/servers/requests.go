@@ -364,7 +364,12 @@ func Delete(client *golangsdk.ServiceClient, id string) (r DeleteResult) {
 
 // ForceDelete forces the deletion of a server.
 func ForceDelete(client *golangsdk.ServiceClient, id string) (r ActionResult) {
-	_, r.Err = client.Post(actionURL(client, id), map[string]interface{}{"forceDelete": ""}, nil, nil)
+	_, r.Err = client.Post(
+		actionURL(client, id),
+		map[string]interface{}{"forceDelete": ""},
+		nil,
+		nil,
+	)
 	return
 }
 

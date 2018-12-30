@@ -78,9 +78,13 @@ func Detail(client *golangsdk.ServiceClient, opts ListDetailOptsBuilder) paginat
 		}
 		url += query
 	}
-	return pagination.NewPager(client, url, func(r pagination.PageResult) pagination.Page {
-		return FlavorPage{pagination.LinkedPageBase{PageResult: r}}
-	})
+	return pagination.NewPager(
+		client,
+		url,
+		func(r pagination.PageResult) pagination.Page {
+			return FlavorPage{pagination.LinkedPageBase{PageResult: r}}
+		},
+	)
 }
 
 func List(client *golangsdk.ServiceClient, opts ListDetailOptsBuilder) pagination.Pager {
@@ -92,9 +96,13 @@ func List(client *golangsdk.ServiceClient, opts ListDetailOptsBuilder) paginatio
 		}
 		url += query
 	}
-	return pagination.NewPager(client, url, func(r pagination.PageResult) pagination.Page {
-		return FlavorPage{pagination.LinkedPageBase{PageResult: r}}
-	})
+	return pagination.NewPager(
+		client,
+		url,
+		func(r pagination.PageResult) pagination.Page {
+			return FlavorPage{pagination.LinkedPageBase{PageResult: r}}
+		},
+	)
 }
 
 // Get retrieves details of a single flavor. Use ExtractFlavor to convert its
